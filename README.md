@@ -32,6 +32,9 @@ Após clonar o repositório, você precisa instalar as dependências do projeto:
    ```bash
    npm install
    ```
+3. Instale o nodemon:
+   ```bash
+   npm install -g nodemon
 
 ### Para o Frontend
 
@@ -43,25 +46,36 @@ Após clonar o repositório, você precisa instalar as dependências do projeto:
    ```bash
    npm install
    ```
+## Para a raiz do projeto
+1. Navegue até a pasta raiz do projeto
+```bash
+   cd ..
+  ```
+2. Instale o concurrently para poder executar os dois projetos ao mesmo tempo
+```bash
+   npm install concurrently --save
+   ```
+Para iniciar o backend e o frontend juntos:
 
-## Executando o Projeto
-
-Para iniciar o servidor backend:
+```bash
+npm run ixc
+   ```
+Para iniciar apenas o servidor backend:
 
 ```bash
 cd IXC/projeto-ixc-backend
-npm start dev
+npm run dev
 ```
 
-Para iniciar o frontend, abra outro terminal:
+Para iniciar apenas o frontend, abra outro terminal:
 
 ```bash
 cd IXC/projeto-ixc-frontend
-npm start dev
+npm run dev
 ```
 
 Agora, você deve conseguir acessar o frontend do projeto no navegador.
-
+Acesse aqui [IXC](http://localhost:3001/login)
 ## Links Úteis
 
 - [Instruções de Instalação](README_links.md)
