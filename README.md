@@ -3,7 +3,7 @@
 Este repositório abriga tanto o backend quanto o frontend do Projeto IXC, uma aplicação desenvolvida para fazer uma comunicação em tempo real utilizando Socket.IO. No backend é utilizado node.js e no frontend é utilizado o React. 
 
 ## Acesse o README do frontend e do backend
-* [frontend.ds](README_frontend.md)
+* [frontend](README_frontend.md)
 * [backend](README_backend.md)
 
 ## Técnologias utilizadas
