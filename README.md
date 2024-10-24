@@ -46,7 +46,7 @@ Após clonar o repositório, você precisa instalar as dependências do projeto:
    ```bash
    npm install
    ```
-## Para a raiz do projeto
+### Para a raiz do projeto
 1. Navegue até a pasta raiz do projeto
 ```bash
    cd ..
@@ -55,11 +55,18 @@ Após clonar o repositório, você precisa instalar as dependências do projeto:
 ```bash
    npm install concurrently --save
    ```
+## Iniciando projetos
+
+Após fazer as instalações necessárias vamos executar os projetos
+
+### Iniciar ambos os projetos
 Para iniciar o backend e o frontend juntos:
 
 ```bash
 npm run ixc
    ```
+
+### Iniciar apenas a API (backend)
 Para iniciar apenas o servidor backend:
 
 ```bash
@@ -67,6 +74,7 @@ cd IXC/projeto-ixc-backend
 npm run dev
 ```
 
+### Iniciar apenas o front
 Para iniciar apenas o frontend, abra outro terminal:
 
 ```bash
@@ -74,7 +82,7 @@ cd IXC/projeto-ixc-frontend
 npm run dev
 ```
 
-Agora, você deve conseguir acessar o frontend do projeto no navegador.
+Para conseguir acessar o frontend do projeto no navegador.
 Acesse aqui [IXC](http://localhost:3001/login)
 ## Links Úteis
 
