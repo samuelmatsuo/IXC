@@ -8,18 +8,18 @@ Este repositório abriga tanto o backend quanto o frontend do Projeto IXC, uma a
 
 ## Técnologias utilizadas
 
-- [React](https://pt-br.react.dev/): Biblioteca para construir interfaces de usuário.
-- [Next.js](https://nextjs.org/docs): Framework para React que permite a renderização do lado do servidor e o suporte a rotas.
-- [Socket.IO](https://socket.io/pt-br/docs/v4/): Biblioteca para comunicação em tempo real entre cliente e servidor.
-- [Axios](https://axios-http.com/ptbr/docs/intro): Biblioteca para fazer requisições HTTP.
-- [CSS Modules](https://github.com/css-modules/css-modules): Para estilos isolados e modularizados.
-- [Node.js](https://nodejs.org/docs/latest/api/): Ambiente de execução JavaScript para o backend.
-- [Express](https://expressjs.com/pt-br/): Framework para construir aplicações web com Node.js.
-- [MongoDB](https://www.mongodb.com/pt-br/docs/): Banco de dados NoSQL para armazenamento de dados.
-- [Mongoose](https://mongoosejs.com/docs/documents.html): Biblioteca para modelar objetos MongoDB em JavaScript.
-- [JSON Web Tokens (JWT)](https://jwt.io/introduction): Para autenticação de usuários.
-- [Socket.IO](https://socket.io/pt-br/docs/v4/): Para comunicação em tempo real entre usuários.
-- [Swagger](https://swagger.io/docs/): Para documentação da API.
+- <img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" alt="React logo" height="20"/> [React](https://pt-br.react.dev/): Biblioteca para construir interfaces de usuário.
+- <img src="https://upload.wikimedia.org/wikipedia/commons/8/8e/Nextjs-logo.svg" alt="Next.js logo" height="20"/> [Next.js](https://nextjs.org/docs): Framework para React que permite a renderização do lado do servidor e o suporte a rotas.
+- <img src="https://upload.wikimedia.org/wikipedia/commons/9/96/Socket-io.svg" alt="Socket.IO logo" height="20"/> [Socket.IO](https://socket.io/pt-br/docs/v4/): Biblioteca para comunicação em tempo real entre cliente e servidor.
+- <img src="https://avatars.githubusercontent.com/u/32372333?s=200&v=4" alt="Axios logo" height="20"/> [Axios](https://axios-http.com/ptbr/docs/intro): Biblioteca para fazer requisições HTTP.
+- <img src="https://avatars.githubusercontent.com/u/45769491?s=200&v=4" alt="CSS Modules logo" height="20"/> [CSS Modules](https://github.com/css-modules/css-modules): Para estilos isolados e modularizados.
+- <img src="https://upload.wikimedia.org/wikipedia/commons/d/d9/Node.js_logo.svg" alt="Node.js logo" height="20"/> [Node.js](https://nodejs.org/docs/latest/api/): Ambiente de execução JavaScript para o backend.
+- <img src="https://upload.wikimedia.org/wikipedia/commons/6/64/Expressjs.png" alt="Express logo" height="20"/> [Express](https://expressjs.com/pt-br/): Framework para construir aplicações web com Node.js.
+- <img src="https://1000logos.net/wp-content/uploads/2020/08/MongoDB-Logo.png" alt="MongoDB logo" height="20"/> [MongoDB](https://www.mongodb.com/pt-br/docs/): Banco de dados NoSQL para armazenamento de dados.
+- <img src="https://avatars.githubusercontent.com/u/7552965?s=200&v=4" alt="Mongoose logo" height="20"/> [Mongoose](https://mongoosejs.com/docs/documents.html): Biblioteca para modelar objetos MongoDB em JavaScript.
+- <img src="https://jwt.io/img/pic_logo.svg" alt="JWT logo" height="20"/> [JSON Web Tokens (JWT)](https://jwt.io/introduction): Para autenticação de usuários.
+- <img src="https://upload.wikimedia.org/wikipedia/commons/a/ab/Swagger-logo.png" alt="Swagger logo" height="20"/> [Swagger](https://swagger.io/docs/): Para documentação da API.
+
 
 ## Pré-requisitos
 
