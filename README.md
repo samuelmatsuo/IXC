@@ -112,10 +112,13 @@ Após completar todos os processos, você pode acessar o programa utilizando o l
 
 > **Atenção:** Certifique-se de que **ambos os projetos** (frontend e backend) estão rodando antes de acessar o link.
 
-### Desenvolvido por Samuel Matsuo  <a href="https://github.com/samuelmatsuo"><img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub logo" height="30" style="filter: brightness(0) invert(1);"/></a> 
-&nbsp;&nbsp; <a href="https://www.linkedin.com/in/samuel-matsuo-672810232/"><img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn logo" height="30"/></a>
+### Desenvolvido por Samuel Matsuo  
+<a href="https://github.com/samuelmatsuo"><img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub logo" height="30" style="filter: brightness(1);"/></a> 
+&nbsp;&nbsp;
+<a href="https://www.linkedin.com/in/samuel-matsuo-672810232/"><img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn logo" height="30"/></a>
 
 <br>
 
 <p align="center">Todos os direitos reservados.</p>
+
 
