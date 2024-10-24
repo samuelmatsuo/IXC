@@ -1,6 +1,25 @@
 # Projeto IXC
 
-Este repositório contém o backend e o frontend do projeto IXC.
+Este repositório abriga tanto o backend quanto o frontend do Projeto IXC, uma aplicação desenvolvida para fazer uma comunicação em tempo real utilizando Socket.IO. No backend é utilizado node.js e no frontend é utilizado o React. 
+
+## Acesse o README do frontend e do backend
+* [frontend.ds](README_frontend.md)
+* [backend](README_backend.md)
+
+## Técnologias utilizadas
+
+- [React](https://pt-br.react.dev/): Biblioteca para construir interfaces de usuário.
+- [Next.js](https://nextjs.org/docs): Framework para React que permite a renderização do lado do servidor e o suporte a rotas.
+- [Socket.IO](https://socket.io/pt-br/docs/v4/): Biblioteca para comunicação em tempo real entre cliente e servidor.
+- [Axios](https://axios-http.com/ptbr/docs/intro): Biblioteca para fazer requisições HTTP.
+- [CSS Modules](https://github.com/css-modules/css-modules): Para estilos isolados e modularizados.
+- [Node.js](https://nodejs.org/docs/latest/api/): Ambiente de execução JavaScript para o backend.
+- [Express](https://expressjs.com/pt-br/): Framework para construir aplicações web com Node.js.
+- [MongoDB](https://www.mongodb.com/pt-br/docs/): Banco de dados NoSQL para armazenamento de dados.
+- [Mongoose](https://mongoosejs.com/docs/documents.html): Biblioteca para modelar objetos MongoDB em JavaScript.
+- [JSON Web Tokens (JWT)](https://jwt.io/introduction): Para autenticação de usuários.
+- [Socket.IO](https://socket.io/pt-br/docs/v4/): Para comunicação em tempo real entre usuários.
+- [Swagger](https://swagger.io/docs/): Para documentação da API.
 
 ## Pré-requisitos
 
