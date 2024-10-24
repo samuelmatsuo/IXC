@@ -1,0 +1,184 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f4f8;
+    font-family: Arial, sans-serif;
+}
+
+.chatBox {
+    display: flex;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    background-color: #ffffff;
+    width: 800px; /* Definido como fixo */
+    height: 600px; /* Definido como fixo */
+    max-width: 100%; /* Garante que não exceda a largura da tela em telas menores */
+    max-height: 100%; /* Garante que não exceda a altura da tela em telas menores */
+}
+
+.userList {
+    width: 30%;
+    border-right: 1px solid #ccc;
+    padding: 10px;
+    background-color: #f9f9f9;
+    overflow-y: auto;
+}
+
+.user {
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    border-radius: 5px;
+    margin-bottom: 8px;
+}
+
+.user:hover {
+    background-color: #e0f7fa;
+    transform: scale(1.02);
+}
+
+.user.selected {
+    background-color: #b2ebf2;
+}
+
+.onlineIndicator {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+.online {
+    background-color: green;
+}
+
+.offline {
+    background-color: red;
+}
+
+.messageArea {
+    width: 70%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.selectedUserInfo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.selectedUserHeader {
+    display: flex;
+    align-items: center;
+}
+
+.selectedUserName {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.messages {
+    flex-grow: 1;
+    margin-bottom: 10px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.message {
+    margin-bottom: 5px;
+}
+
+.inputContainer {
+    display: flex;
+    align-items: center;
+}
+
+.input {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.button {
+    padding: 10px 10px;
+    background-color: #00796b;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #004d40;
+}
+
+.userInfo {
+    padding: 10px;
+    border-left: 1px solid #ccc;
+    background-color: #f9f9f9;
+}
+
+.logoffButton {
+    padding: 5px 10px;
+    background-color: #e53935;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.logoffButton:hover {
+    background-color: #b71c1c;
+}
+
+.popup {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    animation: fadeIn 0.5s, fadeOut 0.5s 4.5s;
+    z-index: 1000; /* Certifique-se de que o pop-up esteja acima de outros elementos */
+}
+.updateButtonContainer {
+    margin-top: 10px; /* Espaçamento acima do botão */
+}
+
+.updateButton {
+    background-color: #4CAF50; /* Cor de fundo */
+    color: white; /* Cor do texto */
+    border: none; /* Sem borda */
+    padding: 10px 15px; /* Preenchimento */
+    text-align: center; /* Alinhamento do texto */
+    text-decoration: none; /* Sem sublinhado */
+    display: inline-block; /* Para suportar largura e altura */
+    font-size: 16px; /* Tamanho da fonte */
+    cursor: pointer; /* Cursor em forma de mão */
+    border-radius: 5px; /* Bordas arredondadas */
+}
+
+.updateButton:hover {
+    background-color: #45a049; /* Cor de fundo ao passar o mouse */
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}

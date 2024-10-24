@@ -1,0 +1,84 @@
+.container {
+    display: flex;
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+    height: 100vh; /* Altura total da tela */
+    background-color: #f0f4f8; /* Cor de fundo da tela */
+}
+
+.formContainer {
+    max-width: 400px; /* Largura máxima do contêiner */
+    width: 90%; /* Largura do contêiner em telas menores */
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 15px; /* Cantos arredondados */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: relative; /* Para posicionar o botão Voltar */
+}
+
+.title {
+    text-align: center;
+}
+
+.backButton {
+    position: absolute; /* Posiciona o botão Voltar em relação ao contêiner */
+    top: 10px; /* Distância do topo */
+    right: 10px; /* Distância da direita */
+    padding: 10px; /* Preenchimento interno do botão */
+    background-color: #f44336; /* Cor de fundo do botão voltar */
+    color: white; /* Cor do texto do botão */
+    border: none; /* Sem borda */
+    border-radius: 4px; /* Cantos arredondados do botão */
+    cursor: pointer; /* Cursor em forma de mão ao passar o mouse */
+}
+
+.backButton:hover {
+    background-color: #d32f2f; /* Cor de fundo ao passar o mouse */
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+}
+
+.formGroup {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    flex: 1;
+    text-align: left;
+}
+
+.input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    flex: 2;
+}
+
+.button {
+    padding: 10px; /* Preenchimento interno do botão */
+    background-color: #4CAF50; /* Cor de fundo do botão Atualizar */
+    color: white; /* Cor do texto do botão */
+    border: none; /* Sem borda */
+    border-radius: 4px; /* Cantos arredondados do botão */
+    cursor: pointer; /* Cursor em forma de mão ao passar o mouse */
+    width: 100%; /* Faz o botão ocupar toda a largura do contêiner */
+    margin-top: 20px; /* Espaçamento acima do botão */
+}
+
+.button:hover {
+    background-color: #45a049; /* Cor de fundo ao passar o mouse */
+}
+
+.message {
+    margin-bottom: 10px;
+    color: red; /* Cor da mensagem de erro */
+    text-align: center;
+}
