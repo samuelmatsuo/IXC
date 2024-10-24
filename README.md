@@ -61,7 +61,10 @@ Após fazer as instalações necessárias vamos executar os projetos
 
 ### Iniciar ambos os projetos
 Para iniciar o backend e o frontend juntos:
-
+#### Acesse a raiz do projeto 
+```bash
+cd ..
+   ```
 ```bash
 npm run ixc
    ```
