@@ -80,7 +80,7 @@ A tela de cadastro permite que novos usuários se registrem no sistema. Ela é c
 
 ## Exemplo de Código: [signup.js](projeto-ixc-frontend/pages/signup.js)
 
-![Exemplo de Tela de Login](images/login-screenshot.png)
+![Exemplo de Tela de Login](images/signup-screenshot.png)
 
 # Tela de Chat
 
