@@ -85,8 +85,7 @@ cd IXC/projeto-ixc-frontend
 npm run dev
 ```
 
-Para conseguir acessar o frontend do projeto no navegador.
-Acesse aqui [IXC](http://localhost:3001/login)
+# Após todos os processos acesse aqui para conseguir utilizar o programa [IXC](http://localhost:3001/login)
 ## Links Úteis
 
 - [Instruções de Instalação](README_links.md)
