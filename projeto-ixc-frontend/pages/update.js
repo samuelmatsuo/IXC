@@ -7,23 +7,26 @@ const UpdateUser = () => {
     const router = useRouter();
     const [formData, setFormData] = useState({ name: '', username: '', password: '', confirmPassword: '' });
     const [message, setMessage] = useState('');
-    const [token, setToken] = useState('');
-    const [userId, setUserId] = useState('');
+    const [token, setToken] = useState(null);
+    const [userId, setUserId] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         const storedToken = localStorage.getItem('token');
         const storedUserId = localStorage.getItem('userId');
 
-        setToken(storedToken);
-        setUserId(storedUserId);
-
-        // Carregar dados do usuário ao montar o componente
-        if (storedUserId && storedToken) {
-            setFormData({ name: '', username: '', password: '', confirmPassword: '' }); // Limpa os dados
+        if (storedToken && storedUserId) {
+            setToken(storedToken);
+            setUserId(storedUserId);
+            setIsLoading(false); // Usuário autenticado, não está mais carregando
         } else {
-            setMessage('ID do usuário não encontrado.');
+            setMessage('Usuário não autenticado. Redirecionando para a página de login...');
+            setIsLoading(false); // Não está mais carregando
+            setTimeout(() => {
+                router.push('/login'); // Redireciona para a página de login
+            }, 2000);
         }
-    }, []);
+    }, [router]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -56,9 +59,15 @@ const UpdateUser = () => {
             setMessage('Erro ao atualizar usuário. Verifique os dados e tente novamente.');
         }
     };
+
     const handleBack = () => {
         router.push('/chat'); // Redireciona para a página de chat
     };
+
+    // Se ainda está carregando, exibe uma mensagem de carregamento
+    if (isLoading) {
+        return <div>Carregando...</div>;
+    }
 
     return (
         <div className={styles.container}>

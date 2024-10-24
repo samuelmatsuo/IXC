@@ -1,9 +1,11 @@
+/* styles/Chat.module.css */
+
 .container {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #f0f4f8;
+    background: linear-gradient(to bottom right, #1a237e, #42a5f5); /* Gradiente azul */
     font-family: Arial, sans-serif;
 }
 
@@ -11,7 +13,7 @@
     display: flex;
     border-radius: 15px;
     overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
     background-color: #ffffff;
     width: 800px; /* Definido como fixo */
     height: 600px; /* Definido como fixo */
@@ -23,25 +25,25 @@
     width: 30%;
     border-right: 1px solid #ccc;
     padding: 10px;
-    background-color: #f9f9f9;
+    background-color: rgba(255, 255, 255, 0.9); /* Fundo com maior transparência */
     overflow-y: auto;
 }
 
 .user {
-    padding: 10px;
+    padding: 12px; /* Aumenta o espaçamento interno */
     cursor: pointer;
     transition: background-color 0.3s, transform 0.2s;
-    border-radius: 5px;
-    margin-bottom: 8px;
+    border-radius: 8px; /* Bordas mais arredondadas */
+    margin-bottom: 10px; /* Aumenta o espaço entre os usuários */
 }
 
 .user:hover {
-    background-color: #e0f7fa;
-    transform: scale(1.02);
+    background-color: #e0f7fa; /* Cor de fundo ao passar o mouse */
+    transform: scale(1.02); /* Efeito de aumento ao passar o mouse */
 }
 
 .user.selected {
-    background-color: #b2ebf2;
+    background-color: #b2ebf2; /* Cor de fundo quando selecionado */
 }
 
 .onlineIndicator {
@@ -61,7 +63,7 @@
 
 .messageArea {
     width: 70%;
-    padding: 10px;
+    padding: 15px; /* Aumenta o espaçamento interno */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -81,7 +83,7 @@
 
 .selectedUserName {
     font-weight: bold;
-    font-size: 18px;
+    font-size: 1.5rem; /* Aumenta o tamanho do nome do usuário */
 }
 
 .messages {
@@ -89,12 +91,13 @@
     margin-bottom: 10px;
     overflow-y: auto;
     border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 10px;
+    border-radius: 8px; /* Bordas mais arredondadas */
+    padding: 15px; /* Aumenta o espaçamento interno */
+    background-color: rgba(240, 240, 240, 0.8); /* Fundo claro e sutil */
 }
 
 .message {
-    margin-bottom: 5px;
+    margin-bottom: 10px; /* Aumenta o espaço entre as mensagens */
 }
 
 .inputContainer {
@@ -104,42 +107,53 @@
 
 .input {
     flex-grow: 1;
-    padding: 10px;
+    padding: 12px; /* Aumenta o espaçamento interno */
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 8px; /* Bordas mais arredondadas */
     margin-right: 10px;
+    transition: border-color 0.3s, box-shadow 0.3s; /* Transição suave */
+}
+
+.input:focus {
+    border-color: #0070f3; /* Cor da borda ao focar */
+    outline: none; /* Remove o contorno padrão */
+    box-shadow: 0 0 5px rgba(0, 112, 243, 0.5); /* Sombra suave ao focar */
 }
 
 .button {
-    padding: 10px 10px;
-    background-color: #00796b;
+    padding: 12px 15px; /* Aumenta o espaçamento interno */
+    background-color: #00796b; /* Cor do botão */
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px; /* Bordas mais arredondadas */
     cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s; /* Transição suave */
 }
 
 .button:hover {
-    background-color: #004d40;
+    background-color: #004d40; /* Cor do botão ao passar o mouse */
+    transform: translateY(-2px); /* Efeito de movimento ao passar o mouse */
 }
 
 .userInfo {
-    padding: 10px;
+    padding: 15px; /* Aumenta o espaçamento interno */
     border-left: 1px solid #ccc;
-    background-color: #f9f9f9;
+    background-color: rgba(255, 255, 255, 0.9); /* Fundo com maior transparência */
 }
 
 .logoffButton {
-    padding: 5px 10px;
-    background-color: #e53935;
+    padding: 12px 15px; /* Aumenta o espaçamento interno */
+    font-size: 16px; /* Tamanho da fonte */
+    background-color: #e53935; /* Cor do botão de logout */
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px; /* Bordas mais arredondadas */
     cursor: pointer;
+    transition: background-color 0.3s; /* Transição suave */
 }
 
 .logoffButton:hover {
-    background-color: #b71c1c;
+    background-color: #b71c1c; /* Cor do botão de logout ao passar o mouse */
 }
 
 .popup {
@@ -149,25 +163,27 @@
     background-color: rgba(0, 0, 0, 0.8);
     color: white;
     padding: 10px 15px;
-    border-radius: 5px;
+    border-radius: 8px; /* Bordas mais arredondadas */
     animation: fadeIn 0.5s, fadeOut 0.5s 4.5s;
     z-index: 1000; /* Certifique-se de que o pop-up esteja acima de outros elementos */
 }
+
 .updateButtonContainer {
     margin-top: 10px; /* Espaçamento acima do botão */
 }
 
 .updateButton {
-    background-color: #4CAF50; /* Cor de fundo */
+    background-color: #4caf50; /* Cor de fundo */
     color: white; /* Cor do texto */
     border: none; /* Sem borda */
-    padding: 10px 15px; /* Preenchimento */
+    padding: 12px 15px; /* Preenchimento */
     text-align: center; /* Alinhamento do texto */
     text-decoration: none; /* Sem sublinhado */
     display: inline-block; /* Para suportar largura e altura */
     font-size: 16px; /* Tamanho da fonte */
     cursor: pointer; /* Cursor em forma de mão */
-    border-radius: 5px; /* Bordas arredondadas */
+    border-radius: 8px; /* Bordas mais arredondadas */
+    transition: background-color 0.3s; /* Transição suave */
 }
 
 .updateButton:hover {

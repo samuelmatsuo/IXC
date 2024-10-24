@@ -28,54 +28,56 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     try {
-        const response = await axios.post('http://localhost:3000/login', { username, password });
-        console.log(response.data); // Verifique a estrutura da resposta
+      const response = await axios.post('http://localhost:3000/login', { username, password });
+      console.log(response.data); // Verifique a estrutura da resposta
 
-        if (response.status === 200) {
-            setMessage('Login bem-sucedido!');
-            const token = response.data.token;
-            const userName = response.data.name; // Nome do usuário
-            const userId = response.data.id; // Altere para o nome correto do ID do usuário na resposta
-            
-            // Armazenando informações no localStorage
-            if (rememberMe) {
-                localStorage.setItem('username', userName);
-                localStorage.setItem('password', password);
-            } else {
-                localStorage.removeItem('username');
-                localStorage.removeItem('password');
-            }
+      if (response.status === 200) {
+        setMessage('Login bem-sucedido!');
+        const token = response.data.token;
+        const userName = response.data.name; // Nome do usuário
+        const userId = response.data.id; // Altere para o nome correto do ID do usuário na resposta
 
-            localStorage.setItem('token', token);
-            localStorage.setItem('userId', userId); 
-
-            // Conexão do socket
-            socket = io('http://localhost:3000', {
-                auth: {
-                    token: token,
-                },
-            });
-
-            socket.on('connect', () => {
-                console.log('Conectado ao servidor de sockets via Socket.IO');
-                socket.emit('register_user', userId);
-            });
-
-            socket.on('update_users', (onlineUserIds) => {
-                // Armazena a lista de usuários online no localStorage
-                localStorage.setItem('onlineUsers', JSON.stringify(onlineUserIds));
-            });
-
-            router.push('/chat');
+        // Armazenando informações no localStorage
+        if (rememberMe) {
+          localStorage.setItem('username', userName);
+          localStorage.setItem('password', password);
+        } else {
+          localStorage.removeItem('username');
+          localStorage.removeItem('password');
         }
-    } catch (error) {
-        console.error('Erro ao fazer login:', error.response ? error.response.data : error);
-        setMessage('Erro ao fazer login, tente novamente.');
-    }
-};
 
+        localStorage.setItem('token', token);
+        localStorage.setItem('userId', userId);
+
+        // Conexão do socket
+        socket = io('http://localhost:3000', {
+          auth: {
+            token: token,
+          },
+        });
+
+        socket.on('connect', () => {
+          console.log('Conectado ao servidor de sockets via Socket.IO');
+          socket.emit('register_user', userId);
+        });
+
+        socket.on('update_users', (onlineUserIds) => {
+          // Armazena a lista de usuários online no localStorage
+          localStorage.setItem('onlineUsers', JSON.stringify(onlineUserIds));
+        });
+
+        router.push('/chat');
+      }
+    } catch (error) {
+      console.error('Erro ao fazer login:', error.response ? error.response.data : error);
+      setMessage('Erro ao fazer login, tente novamente.');
+    }
+  };
+  const handleSingupRedirect = () => {
+    router.push('/signup'); // Navegar para a página de login
+  };
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>Login</h2>
@@ -108,12 +110,11 @@ const Login = () => {
           />
           Lembrar da Senha
         </label>
+        <p></p>
         <button type="submit" className={styles.button}>Login</button>
+        <button onClick={handleSingupRedirect} className={styles.button}>Não tem uma conta? Registrar</button>
       </form>
       {message && <p className={styles.message}>{message}</p>}
-      <p className={styles.signupPrompt}>
-        Não tem uma conta? <a href="/signup">Registrar</a>
-      </p>
     </div>
   );
 };
