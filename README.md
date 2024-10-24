@@ -67,11 +67,11 @@ Após clonar o repositório, você precisa instalar as dependências do projeto:
    ```
 ### Para a raiz do projeto
 1. Navegue até a pasta raiz do projeto
-```bash
+   ```bash
    cd ..
   ```
 2. Instale o concurrently para poder executar os dois projetos ao mesmo tempo
-```bash
+   ```bash
    npm install concurrently --save
    ```
 ## Iniciando projetos
@@ -81,28 +81,28 @@ Após fazer as instalações necessárias vamos executar os projetos
 ### Iniciar ambos os projetos
 Para iniciar o backend e o frontend juntos:
 #### Acesse a raiz do projeto 
-```bash
-cd ..
+   ```bash
+   cd ..
    ```
-```bash
-npm run ixc
+   ```bash
+   npm run ixc
    ```
 
 ### Iniciar apenas a API (backend)
 Para iniciar apenas o servidor backend:
 
-```bash
-cd IXC/projeto-ixc-backend
-npm run dev
-```
+   ```bash
+   cd IXC/projeto-ixc-backend
+   npm run dev
+   ```
 
 ### Iniciar apenas o front
 Para iniciar apenas o frontend, abra outro terminal:
 
-```bash
-cd IXC/projeto-ixc-frontend
-npm run dev
-```
+   ```bash
+   cd IXC/projeto-ixc-frontend
+   npm run dev
+   ```
 
 # Acessar o Programa IXC
 
@@ -112,6 +112,14 @@ Após completar todos os processos, você pode acessar o programa utilizando o l
 
 > **Atenção:** Certifique-se de que **ambos os projetos** (frontend e backend) estão rodando antes de acessar o link.
 
-## Links Úteis
+### Desenvolvido por Samuel Matsuo
 
-- [Instruções de Instalação](README_links.md)
+<p align="center">
+  <a href="https://github.com/samuelmatsuo">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub logo" height="20"/>
+  </a>
+  &nbsp;&nbsp;
+  <a href="https://www.linkedin.com/in/samuel-matsuo-672810232/">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn logo" height="20"/>
+  </a>
+</p>
