@@ -15,7 +15,7 @@ Antes de começar, você precisa ter o [Node.js](https://nodejs.org/) e o [Git](
    ```
 3. Clone o repositório:
    ```bash
-   git clone https://github.com/samuelmatsuo/IXC-DEV.git
+   git clone https://github.com/samuelmatsuo/IXC.git
    ```
 
 ## Instalando Dependências
