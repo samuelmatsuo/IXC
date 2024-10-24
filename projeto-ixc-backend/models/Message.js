@@ -11,7 +11,7 @@ const messageSchema = new mongoose.Schema({
     ref: 'User', // Referência ao modelo de usuário
     required: true,
   },
-  senderName: { // Novo campo para o nome do remetente
+  senderName: {
     type: String,
     required: true,
   },

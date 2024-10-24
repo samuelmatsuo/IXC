@@ -4,8 +4,7 @@ const Message = require('../models/Message');
 const users = require('../models/User');
 
 // Objeto para armazenar usuários conectados
-const connectedUsers = {}; // Mova esta linha para o topo para garantir que esteja disponível
-
+const connectedUsers = {}; 
 // Registro de usuários
 const registerUser = async (req, res) => {
   const { name, username, password } = req.body;
