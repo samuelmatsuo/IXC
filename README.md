@@ -23,7 +23,7 @@ Este repositório abriga tanto o backend quanto o frontend do Projeto IXC, uma a
 
 ## Pré-requisitos
 
-Antes de começar, você precisa ter o [Node.js](https://nodejs.org/) e o [Git](https://git-scm.com/) instalados no seu sistema. Para mais informações sobre como instalar, consulte [Instruções de Instalação](README_links.md).
+Antes de começar, você precisa ter o [Node.js](https://nodejs.org/) e o [Git](https://git-scm.com/) instalados no seu sistema. Para mais informações sobre como instalar, consulte [Instruções de Instalação](README/README_links.md).
 
 ## Clonando o Repositório
 
