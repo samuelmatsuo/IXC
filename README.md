@@ -86,6 +86,7 @@ npm run dev
 ```
 
 # Após todos os processos acesse aqui para conseguir utilizar o programa [IXC](http://localhost:3001/login)
+## Certifiquese que o ambos os projetos estão rodando antes acessar o link!
 ## Links Úteis
 
 - [Instruções de Instalação](README_links.md)
