@@ -26,7 +26,7 @@ Após clonar o repositório, você precisa instalar as dependências do projeto:
 
 1. Navegue até o diretório do backend:
    ```bash
-   cd IXC-DEV/projeto-ixc-backend
+   cd IXC/projeto-ixc-backend
    ```
 2. Instale as dependências:
    ```bash
@@ -49,15 +49,15 @@ Após clonar o repositório, você precisa instalar as dependências do projeto:
 Para iniciar o servidor backend:
 
 ```bash
-cd IXC-DEV/projeto-ixc-backend
-npm start back
+cd IXC/projeto-ixc-backend
+npm start dev
 ```
 
 Para iniciar o frontend, abra outro terminal:
 
 ```bash
-cd IXC-DEV/projeto-ixc-frontend
-npm start front
+cd IXC/projeto-ixc-frontend
+npm start dev
 ```
 
 Agora, você deve conseguir acessar o frontend do projeto no navegador.
