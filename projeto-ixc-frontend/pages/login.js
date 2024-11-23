@@ -1,10 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/router';
-import io from 'socket.io-client'; // Importando o Socket.IO Client
 import styles from '../styles/Login.module.css';
-
-let socket; // Variável global para o socket
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -14,7 +11,6 @@ const Login = () => {
   const router = useRouter();
 
   useEffect(() => {
-    // Verifica se as credenciais estão armazenadas
     const savedUsername = localStorage.getItem('username');
     const savedPassword = localStorage.getItem('password');
 
@@ -30,61 +26,51 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:3000/login', { username, password });
-      console.log(response.data); // Verifique a estrutura da resposta
-
-      if (response.status === 200) {
-        setMessage('Login bem-sucedido!');
-        const token = response.data.token;
-        const userName = response.data.name; // Nome do usuário
-        const userId = response.data.id; // Altere para o nome correto do ID do usuário na resposta
-
-        // Armazenando informações no localStorage
-        if (rememberMe) {
-          localStorage.setItem('username', userName);
-          localStorage.setItem('password', password);
-        } else {
-          localStorage.removeItem('username');
-          localStorage.removeItem('password');
-        }
-
-        localStorage.setItem('token', token);
-        localStorage.setItem('userId', userId);
-
-        // Conexão do socket
-        socket = io('http://localhost:3000', {
-          auth: {
-            token: token,
+      const response = await axios.post(
+        'http://localhost:3000/users/login',
+        { username, password },
+        {
+          headers: {
+            'Content-Type': 'application/json',
           },
-        });
+        }
+      );
+      console.log(response.status);
+      
+      if (response.status === 201) {
+        const { name, id_user } = response.data;
 
-        socket.on('connect', () => {
-          console.log('Conectado ao servidor de sockets via Socket.IO');
-          socket.emit('register_user', userId);
-        });
+        localStorage.setItem('username', username);
+        localStorage.setItem('userId', id_user);
+        localStorage.setItem('name', name);
 
-        socket.on('update_users', (onlineUserIds) => {
-          // Armazena a lista de usuários online no localStorage
-          localStorage.setItem('onlineUsers', JSON.stringify(onlineUserIds));
-        });
+        console.log('Redirecionando para o chat...');
 
-        router.push('/chat');
+        console.log(response.status);
+
+        await router.push('/chat');
+      }
+      if(response.status === 400 || response.status === 500){
+        console.log('aaaaaaaaaaaaaaaaaaaaaaa');
+        setMessage('Credenciais inválidas');
+        await router.push('/login');
+
       }
     } catch (error) {
       console.error('Erro ao fazer login:', error.response ? error.response.data : error);
       setMessage('Erro ao fazer login, tente novamente.');
     }
   };
-  const handleSingupRedirect = () => {
-    router.push('/signup'); // Navegar para a página de login
+
+  const handleSignupRedirect = () => {
+    router.push('/signup');
   };
+
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>Login</h2>
       <form onSubmit={handleSubmit} className={styles.form}>
-        <label>
-          Nome
-        </label>
+        <label>Nome</label>
         <input
           type="text"
           value={username}
@@ -92,13 +78,11 @@ const Login = () => {
           className={styles.input}
           required
         />
-        <label>
-          Senha
-        </label>
+        <label>Senha</label>
         <input
           type="password"
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={(e) => setPassword(e.target.value)} 
           className={styles.input}
           required
         />
@@ -110,9 +94,10 @@ const Login = () => {
           />
           Lembrar da Senha
         </label>
-        <p></p>
         <button type="submit" className={styles.button}>Login</button>
-        <button onClick={handleSingupRedirect} className={styles.button}>Não tem uma conta? Registrar</button>
+        <button type="button" onClick={handleSignupRedirect} className={styles.button}>
+          Não tem uma conta? Registrar
+        </button>
       </form>
       {message && <p className={styles.message}>{message}</p>}
     </div>

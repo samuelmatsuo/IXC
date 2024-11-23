@@ -9,21 +9,34 @@ const UpdateUser = () => {
     const [message, setMessage] = useState('');
     const [token, setToken] = useState(null);
     const [userId, setUserId] = useState(null);
+    const [username, setUsername] = useState(null);
+    const [name, setName] = useState(null);
+
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        const storedToken = localStorage.getItem('token');
         const storedUserId = localStorage.getItem('userId');
+        const storedUsername = localStorage.getItem('username');
+        const storedName = localStorage.getItem('name');
 
-        if (storedToken && storedUserId) {
-            setToken(storedToken);
+        if (storedUserId) {
             setUserId(storedUserId);
-            setIsLoading(false); // Usuário autenticado, não está mais carregando
+            setUsername(storedUsername);
+            setName(storedName);
+
+            setFormData({
+                name: storedName || '',
+                username: storedUsername || '',
+                password: '',
+                confirmPassword: ''
+            })
+
+            setIsLoading(false);
         } else {
             setMessage('Usuário não autenticado. Redirecionando para a página de login...');
-            setIsLoading(false); // Não está mais carregando
+            setIsLoading(false);
             setTimeout(() => {
-                router.push('/login'); // Redireciona para a página de login
+                router.push('/login');
             }, 2000);
         }
     }, [router]);
@@ -36,19 +49,16 @@ const UpdateUser = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // Verifica se as senhas coincidem
         if (formData.password !== formData.confirmPassword) {
             setMessage('As senhas não coincidem.');
             return;
         }
 
         try {
-            const response = await axios.put(`http://localhost:3000/users/${userId}`, formData, {
-                headers: { Authorization: `Bearer ${token}` },
-            });
+            const response = await axios.put(`http://localhost:3000/users/${userId}`, formData);
             setMessage('Usuário atualizado com sucesso!');
 
-            // Redireciona para a página de login após o sucesso
+
             setTimeout(() => {
                 router.push('/login');
             }, 2000);
@@ -61,10 +71,9 @@ const UpdateUser = () => {
     };
 
     const handleBack = () => {
-        router.push('/chat'); // Redireciona para a página de chat
+        router.push('/chat');
     };
 
-    // Se ainda está carregando, exibe uma mensagem de carregamento
     if (isLoading) {
         return <div>Carregando...</div>;
     }

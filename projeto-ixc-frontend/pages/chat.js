@@ -1,10 +1,8 @@
 import { useEffect, useState } from 'react';
-import io from 'socket.io-client';
-import axios from 'axios';
 import { useRouter } from 'next/router';
+import axios from 'axios';
 import styles from '../styles/chat.module.css';
-
-const socket = io('http://localhost:3000');
+import { wsconnect } from '@nats-io/nats-core';
 
 const Chat = () => {
     const router = useRouter();
@@ -12,41 +10,46 @@ const Chat = () => {
     const [inputValue, setInputValue] = useState('');
     const [users, setUsers] = useState([]);
     const [selectedUser, setSelectedUser] = useState(null);
-    const [fetchInterval, setFetchInterval] = useState(null);
-    const [popupMessage, setPopupMessage] = useState('');
-    const [token, setToken] = useState(null);
     const [username, setUsername] = useState(null);
     const [userId, setUserId] = useState(null);
+    const [natsClient, setNatsClient] = useState(null);
+    const [notifications, setNotifications] = useState([]);
 
     useEffect(() => {
-        // Lê os valores do localStorage no lado do cliente
-        const storedToken = localStorage.getItem('token');
         const storedUsername = localStorage.getItem('username');
         const storedUserId = localStorage.getItem('userId');
-        
-        setToken(storedToken);
         setUsername(storedUsername);
         setUserId(storedUserId);
 
-        if (!storedToken) {
-            router.push('/login'); // Redireciona para a página de login se não houver token
-        }
-    }, [router]);
+        const connectToNATS = async () => {
+            if (!natsClient) {
+                try {
+                    const client = await wsconnect({ servers: ['ws://localhost:3222']});
+                    console.log('Conectado ao NATS:', !client.isClosed());
+                    setNatsClient(client);
 
-    useEffect(() => {
-        if (!token || !userId) return; // Verifica se o token e userId estão disponíveis
+                    client.closed().then(() => {
+                        console.warn('Conexão com NATS encerrada.');
+                        setNatsClient(null);
+                    });
+                } catch (error) {
+                    console.error('Erro ao conectar ao NATS:', error);
+                }
+            }
+        };
+
+        connectToNATS();
 
         const fetchUsers = async () => {
             try {
-                const response = await axios.get('http://localhost:3000/users', {
-                    headers: { Authorization: `Bearer ${token}` },
-                });
-
+                const response = await axios.get('http://localhost:3000/users/getUsers');
                 const onlineUsers = JSON.parse(localStorage.getItem('onlineUsers')) || [];
-                setUsers(response.data.map(user => ({
-                    ...user,
-                    isOnline: onlineUsers.includes(user._id),
-                })));
+                setUsers(
+                    response.data.map((user) => ({
+                        ...user,
+                        isOnline: onlineUsers.includes(user._id),
+                    }))
+                );
             } catch (error) {
                 console.error('Erro ao buscar usuários:', error);
             }
@@ -54,55 +57,39 @@ const Chat = () => {
 
         fetchUsers();
 
-        socket.on('connect', () => {
-            console.log('Conectado ao servidor de sockets via Socket.IO');
-            socket.emit('register_user', userId);
-            fetchUsers();
-        });
-
-        socket.on('update_users', (onlineUserIds) => {
-            setUsers((prevUsers) =>
-                prevUsers.map((user) => ({
-                    ...user,
-                    isOnline: onlineUserIds.includes(user._id),
-                }))
-            );
-        });
-
-        socket.on('receive_message', (msg) => {
-            setMessages((prevMessages) => [...prevMessages, msg]);
-            if (msg.recipientId === userId) {
-                setPopupMessage(`Nova mensagem de ${msg.senderName}: ${msg.message}`);
-                setTimeout(() => setPopupMessage(''), 5000);
-            }
-        });
-
         return () => {
-            socket.off('receive_message');
-            socket.off('update_users');
+            if (natsClient) {
+                natsClient.close();
+            }
         };
-    }, [token, userId]);
+    }, [natsClient]);
 
-    const handleSelectUser = (user) => {
+    const handleSelectUser = async (user) => {
         if (user) {
+            console.log('Usuário selecionado:', user);
             setSelectedUser(user._id);
-            fetchMessages(userId, user._id);
-            setPopupMessage('');
-
-            const intervalId = setInterval(() => {
-                fetchMessages(userId, user._id);
-            }, 1000);
-            setFetchInterval(intervalId);
+            await fetchMessages(userId, user._id);
+        } else {
+            console.warn('Usuário inválido selecionado.');
         }
     };
 
     const fetchMessages = async (userId, selectedUser) => {
+        if (!natsClient || natsClient.isClosed()) {
+            console.error('Conexão com NATS fechada ou não inicializada.');
+            return;
+        }
+
         if (userId && selectedUser) {
             try {
-                const response = await axios.get(`http://localhost:3000/messages/${userId}/${selectedUser}`, {
-                    headers: { Authorization: `Bearer ${token}` },
-                });
-                setMessages(response.data);
+                const response = await natsClient.request(
+                    userId + '.find',
+                    JSON.stringify({ senderId: userId, recipientId: selectedUser }),
+                    { timeout: 5000 }
+                );
+
+                const decodedMessages = response.json();
+                setMessages(decodedMessages);
             } catch (error) {
                 console.error('Erro ao buscar mensagens:', error);
             }
@@ -113,38 +100,74 @@ const Chat = () => {
         if (inputValue.trim() && selectedUser) {
             const messageData = {
                 message: inputValue,
-                recipientId: selectedUser,
                 senderId: userId,
+                recipientId: selectedUser,
                 senderName: username,
             };
 
-            try {
-                const response = await axios.post('http://localhost:3000/messages', messageData, {
-                    headers: { Authorization: `Bearer ${token}` },
-                });
-
-                socket.emit('chat_message', response.data);
-                setMessages((prevMessages) => [...prevMessages, response.data]);
+            if (natsClient && !natsClient.isClosed()) {
+                await natsClient.request(selectedUser + '.msg.new', JSON.stringify(messageData));
+                setMessages((prevMessages) => [...prevMessages, messageData]);
                 setInputValue('');
-            } catch (error) {
-                console.error('Erro ao enviar mensagem:', error);
+            } else {
+                console.error('Erro: Cliente NATS não está conectado.');
             }
         }
     };
 
-    const handleLogoff = () => {
+    const handleLogoff = async () => {
         localStorage.clear();
-        socket.disconnect(); // Desconecta do Socket.IO
-        router.push('/login'); // Redireciona para a página de login
+        if (natsClient && !natsClient.isClosed()) {
+            await natsClient.close();
+        }
+        localStorage.clear();
+        router.push('/login');
+    };
+
+    const removeNotification = (index) => {
+        setNotifications((prevNotifications) => prevNotifications.filter((_, i) => i !== index));
     };
 
     useEffect(() => {
-        return () => {
-            if (fetchInterval) {
-                clearInterval(fetchInterval);
-            }
-        };
-    }, [fetchInterval]);
+        if (natsClient && userId) {
+            const subscription = natsClient.subscribe(userId + '.msg.notify', {
+                callback: async (err, msg) => {
+                    if (err) {
+                        console.error('Erro no callback NATS:', err);
+                        return;
+                    }
+                    if (msg) {
+                        try {
+                            const decodedMessage = JSON.parse(new TextDecoder().decode(msg.data));
+                            if (decodedMessage.senderId === selectedUser) {
+                                setMessages((prevMessages) => [...prevMessages, decodedMessage]);
+                                setInputValue('');
+                            } else {
+                                setNotifications((prevNotifications) => [
+                                    ...prevNotifications,
+                                    {
+                                        senderId: decodedMessage.senderId,
+                                        senderName: decodedMessage.senderName,
+                                        message: decodedMessage.message,
+                                    },
+                                ]);
+                            }
+                        } catch (decodeError) {
+                            console.error('Erro ao decodificar a mensagem:', decodeError);
+                        }
+                    } else {
+                        console.warn('Mensagem recebida é nula ou indefinida.');
+                    }
+                },
+            });
+
+            return () => {
+                if (subscription) {
+                    subscription.unsubscribe();
+                }
+            };
+        }
+    }, [natsClient, userId, selectedUser]);
 
     return (
         <div className={styles.container}>
@@ -157,7 +180,11 @@ const Chat = () => {
                             className={`${styles.user} ${selectedUser === user._id ? styles.selected : ''}`}
                             onClick={() => handleSelectUser(user)}
                         >
-                            <span className={`${styles.onlineIndicator} ${user.isOnline ? styles.online : styles.offline}`}></span>
+                            <span
+                                className={`${styles.onlineIndicator} ${
+                                    user.isOnline ? styles.online : styles.offline
+                                }`}
+                            ></span>
                             {user.name}
                         </div>
                     ))}
@@ -166,16 +193,21 @@ const Chat = () => {
                     <div className={styles.selectedUserInfo}>
                         {selectedUser ? (
                             <div className={styles.selectedUserHeader}>
-                                <span className={`${styles.onlineIndicator} ${users.find(user => user._id === selectedUser)?.isOnline ? styles.online : styles.offline}`}></span>
+                                <span
+                                    className={`${styles.onlineIndicator} ${
+                                        users.find((user) => user._id === selectedUser)?.isOnline
+                                            ? styles.online
+                                            : styles.offline
+                                    }`}
+                                ></span>
                                 <span className={styles.selectedUserName}>
-                                    {users.find(user => user._id === selectedUser)?.name}
+                                    {users.find((user) => user._id === selectedUser)?.name}
                                 </span>
                             </div>
                         ) : (
                             <h2>Chat</h2>
                         )}
                     </div>
-
                     <div className={styles.messages}>
                         {messages.length === 0 ? (
                             <div>Nenhuma mensagem encontrada.</div>
@@ -187,7 +219,6 @@ const Chat = () => {
                             ))
                         )}
                     </div>
-
                     <div className={styles.inputContainer}>
                         <input
                             type="text"
@@ -213,11 +244,17 @@ const Chat = () => {
                     </div>
                 </div>
             </div>
-            {popupMessage && (
-                <div className={styles.popup}>
-                    {popupMessage}
-                </div>
-            )}
+            <div className={styles.notificationContainer}>
+                {notifications.map((notif, index) => (
+                    <div
+                        key={index}
+                        className={styles.notification}
+                        onClick={() => removeNotification(index)}
+                    >
+                        <strong>{"mensagem nova de " + notif.senderName}</strong>
+                    </div>
+                ))}
+            </div>
         </div>
     );
 };

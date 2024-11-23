@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/router';
-import styles from '../styles/Login.module.css'; // Importar estilos do módulo
+import styles from '../styles/Login.module.css';
 
 const Signup = () => {
   const [name, setName] = useState('');
@@ -11,18 +11,23 @@ const Signup = () => {
   const router = useRouter();
 
   const handleSubmit = async (e) => {
+    debugger;
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:3000/register', {
-        name,
-        username,
-        password
-      });
+      const response = await axios.post(
+        'http://localhost:3000/users/register', 
+        { name, username, password }, 
+        {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
 
       if (response.status === 201) {
         setMessage('Usuário criado com sucesso!');
-        router.push('/login'); // Redireciona para a página de login após o registro
+        router.push('/login');
       }
     } catch (error) {
       console.error('Erro ao registrar usuário:', error.response ? error.response.data : error);
@@ -31,7 +36,7 @@ const Signup = () => {
   };
 
   const handleLoginRedirect = () => {
-    router.push('/login'); // Navegar para a página de login
+    router.push('/login');
   };
 
   return (
