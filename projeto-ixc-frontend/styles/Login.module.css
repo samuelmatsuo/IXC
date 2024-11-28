@@ -1,0 +1,68 @@
+/* styles/Login.module.css */
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: linear-gradient(to bottom right, #1a237e, #42a5f5); /* Gradiente azul */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.title {
+    margin-bottom: 20px;
+    color: #fff; /* Cor do texto do título */
+    font-size: 2.5rem; /* Aumenta o tamanho do título */
+    font-family: 'Arial', sans-serif; /* Fonte do título */
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); /* Sombra no texto */
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    width: 320px; /* Largura um pouco maior */
+    background: rgba(255, 255, 255, 0.95); /* Fundo branco com maior transparência */
+    border-radius: 15px; /* Bordas mais arredondadas */
+    padding: 30px; /* Adiciona mais espaçamento interno */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3); /* Sombra mais suave na caixa do formulário */
+}
+
+.input {
+    padding: 12px; /* Aumenta o espaçamento interno */
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px; /* Bordas mais arredondadas */
+    transition: border-color 0.3s, box-shadow 0.3s; /* Transição suave na borda e sombra */
+    font-size: 1rem; /* Tamanho da fonte do input */
+}
+
+.input:focus {
+    border-color: #0070f3; /* Cor da borda ao focar */
+    outline: none; /* Remove o contorno padrão */
+    box-shadow: 0 0 5px rgba(0, 112, 243, 0.5); /* Sombra suave ao focar */
+}
+
+.button {
+    padding: 12px; /* Aumenta o espaçamento interno */
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 8px; /* Bordas mais arredondadas */
+    background-color: #0070f3; /* Cor do botão */
+    color: white;
+    cursor: pointer;
+    font-size: 1rem; /* Tamanho da fonte do botão */
+    transition: background-color 0.3s, transform 0.2s; /* Transição suave na cor de fundo e na transformação */
+}
+
+.button:hover {
+    background-color: #005bb5; /* Cor do botão ao passar o mouse */
+    transform: translateY(-2px); /* Efeito de movimento ao passar o mouse */
+}
+
+.message {
+    margin-top: 15px;
+    color: #e53935; /* Cor da mensagem de erro */
+    text-align: center; /* Centraliza a mensagem */
+    font-size: 0.9rem; /* Tamanho da fonte da mensagem */
+}
