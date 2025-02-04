@@ -1,13 +1,13 @@
-import { useState } from 'react';
-import axios from 'axios';
-import { useRouter } from 'next/router';
-import styles from '../styles/Login.module.css';
+import { useState } from "react";
+import axios from "axios";
+import { useRouter } from "next/router";
+import styles from "../styles/Login.module.css";
 
 const Signup = () => {
-  const [name, setName] = useState('');
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [message, setMessage] = useState('');
+  const [name, setName] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
   const router = useRouter();
 
   const handleSubmit = async (e) => {
@@ -16,27 +16,30 @@ const Signup = () => {
 
     try {
       const response = await axios.post(
-        'http://localhost:3000/users/register', 
-        { name, username, password }, 
+        "http://3.142.149.2:3000:3000/users/register",
+        { name, username, password },
         {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }
-    );
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       if (response.status === 201) {
-        setMessage('Usuário criado com sucesso!');
-        router.push('/login');
+        setMessage("Usuário criado com sucesso!");
+        router.push("/login");
       }
     } catch (error) {
-      console.error('Erro ao registrar usuário:', error.response ? error.response.data : error);
-      setMessage('Erro ao registrar, tente novamente.');
+      console.error(
+        "Erro ao registrar usuário:",
+        error.response ? error.response.data : error
+      );
+      setMessage("Erro ao registrar, tente novamente.");
     }
   };
 
   const handleLoginRedirect = () => {
-    router.push('/login');
+    router.push("/login");
   };
 
   return (
@@ -67,10 +70,15 @@ const Signup = () => {
           className={styles.input}
           required
         />
-        <button type="submit" className={styles.button}>Registrar</button>
-        <button onClick={handleLoginRedirect} className={styles.button}>Já tem uma conta? Faça login</button>
+        <button type="submit" className={styles.button}>
+          Registrar
+        </button>
+        <button onClick={handleLoginRedirect} className={styles.button}>
+          Já tem uma conta? Faça login
+        </button>
       </form>
-      {message && <p className={styles.message}>{message}</p>} {/* Exibe a mensagem, se houver */}
+      {message && <p className={styles.message}>{message}</p>}{" "}
+      {/* Exibe a mensagem, se houver */}
     </div>
   );
 };

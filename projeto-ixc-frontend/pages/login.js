@@ -35,7 +35,7 @@ const Login = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/users/login",
+        "http://3.142.149.2:3000/users/login",
         { username, password },
         {
           headers: {
