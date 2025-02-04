@@ -1,0 +1,39 @@
+version: "3.5"
+
+networks:
+  my_network: # Definição da rede
+    driver: bridge
+
+services:
+  nats:
+    image: nats:latest
+    container_name: nats
+    networks:
+      - my_network
+    ports:
+      - "4222:4222"
+      - "3222:3222"
+    command: ["-c", "/etc/nats/server.conf"]
+    volumes:
+      - ./server.conf:/etc/nats/server.conf
+  api:
+    build: ./nest-app
+    container_name: api
+    ports:
+      - "3000:3000"
+    depends_on:
+      - nats
+    networks:
+      - my_network
+    environment:
+      - NATS_HOST=nats # Usa o nome do serviço para resolver o host
+
+  frontend:
+    build: ./projeto-ixc-frontend
+    container_name: frontend
+    ports:
+      - "3001:3001"
+    depends_on:
+      - api
+    networks:
+      - my_network

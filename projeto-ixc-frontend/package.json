@@ -5,13 +5,14 @@
   "scripts": {
     "dev": "next dev -p 3001",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -p 3001",
     "start:dev": "next build && next dev -p 3001"
   },
   "dependencies": {
     "@nats-io/nats-core": "^3.0.0-45",
     "axios": "^0.24.0",
     "cors": "^2.8.5",
+    "nats": "^2.29.1",
     "nats.ws": "^1.29.2",
     "next": "^15.0.0",
     "react": "^18.3.1",

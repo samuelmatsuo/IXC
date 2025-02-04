@@ -13,7 +13,7 @@ import { UserModule } from 'src/users/user.module';
 
 @Module({
   imports: [
-    MongooseModule.forFeature([{ name: Message.name, schema: MessageSchema }])
+    MongooseModule.forFeature([{ name: Message.name, schema: MessageSchema }]),
   ],
   providers: [
     NewMessageHandler,
@@ -23,7 +23,7 @@ import { UserModule } from 'src/users/user.module';
       provide: 'NATS_CONNECTION',
       useFactory: async () => {
         const connection = await connect({
-          servers: ['nats://localhost:4222'],
+          servers: ['nats://nats:4222'],
           timeout: 1000,
         });
         console.log('NATS connection established');
@@ -32,6 +32,6 @@ import { UserModule } from 'src/users/user.module';
     },
   ],
   controllers: [BrokerController],
-  exports: [BrokerClientService]
+  exports: [BrokerClientService],
 })
 export class BrokerModule {}

@@ -1,4 +1,31 @@
-# compiled output
-/dist
-/node_modules
-/build
+# Dependências do Node.js
+node_modules/
+
+# Arquivos de log
+*.log
+
+# Arquivos de configuração do NATS (se você estiver utilizando arquivos .conf)
+*.conf
+
+# Arquivos gerados pelo TypeScript (se aplicável)
+dist/
+build/
+
+# Arquivos de configuração do sistema operacional
+.DS_Store
+
+# Editor de código (ex: VSCode)
+.vscode/
+
+# Arquivos de teste do npm
+coverage/
+*.tgz
+
+# Arquivos temporários ou de cache
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Arquivos de backup e de swap
+*.swp
+*~
